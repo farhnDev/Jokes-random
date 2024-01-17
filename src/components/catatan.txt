@@ -1,0 +1,55 @@
+import Button from "./components/Button.jsx";
+import PresentationContent from "./components/PresentationContent.jsx";
+import Card from "./components/card.jsx";
+import {IconBrandGithub} from "@tabler/icons-react";
+import Input from "./components/Input.jsx";
+import Label from "./components/Label.jsx";
+import {useState} from "react";
+
+
+export default function App() {
+    const [form, setForm] = useState({
+        name: '',
+        email: ''
+
+    });
+
+    function onChange(e) {
+        setForm({...form, [e.target.name]: e.target.value
+        })
+    }
+
+    function submit(e) {
+        e.preventDefault();
+        console.log(form);
+    }
+    return (
+        <PresentationContent>
+            <Card>
+                <Card.Header>Sign in for Student</Card.Header>
+                <form onSubmit={submit}>
+                    <Card.Body>
+                        <div className={"mb-5 border rounded-lg p-4"}>
+                            <p>Name: {form.name || ''}</p>
+                            <p>Email: {form.email || ''}</p>
+                        </div>
+                        <div className="mb-6">
+                            <Label htmlFor={'name'} value={'name'}/>
+                            <Input value={form.name} onChange={onChange} id={'name'} name={'name'}/>
+                        </div>
+                        <div className="mb-6">
+                            <Label htmlFor={'email'} value={'email'}/>
+                            <Input value={form.email} onChange={onChange} id={'email'} name={'email'}/>
+                        </div>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button>
+                            <IconBrandGithub/>
+                            Register
+                        </Button>
+                    </Card.Footer>
+                </form>
+            </Card>
+        </PresentationContent>
+    )
+}
